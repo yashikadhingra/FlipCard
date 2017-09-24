@@ -1,0 +1,98 @@
+import { Component,ElementRef,Renderer } from '@angular/core';
+
+@Component({
+  selector: 'game',
+  template: `<p>select a card</p><br>
+  	 <div class="row">
+	 <div *ngFor="let x of bgcolor; let i = index" class="columns">
+	 <div (click)="hightlightStatus[i]=!hightlightStatus[i]" class="card"  (click)="flip(i)" [class.flipped]="hightlightStatus[i]" attr.id="card_{{i}}">
+	 <div class="front">{{i+1}}</div>
+	 <div class="back" [style.background]="x"></div></div>
+	 </div>
+	 </div>`,
+  styles:[`.row{
+  width:820px;
+  }
+  .columns{
+  width:200px;
+  height:200px;
+  border:2px solid red;
+  float:left;
+      position: relative;
+    border: 1px solid #ccc;
+    -webkit-perspective: 800px;
+    -moz-perspective: 800px;
+    -o-perspective: 800px;
+    perspective: 800px;
+  }
+  .card{
+  background-color:red;
+   width: 100%;
+    height: 100%;
+    position: absolute;
+    -webkit-transition: -webkit-transform 1s;
+    -moz-transition: -moz-transform 1s;
+    -o-transition: -o-transform 1s;
+    transition: transform 1s;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform-origin: 50% 50%;}
+	.card div {
+    display: block;
+    height: 100%;
+    width: 100%;
+    line-height: 260px;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    font-size: 140px;
+    position: absolute;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.card .front {
+  background: red;
+}
+.card .back {
+    background: blue;
+    -webkit-transform: rotateY( 180deg );
+    -moz-transform: rotateY( 180deg );
+    -o-transform: rotateY( 180deg );
+    transform: rotateY( 180deg );
+}
+.flipped {
+    -webkit-transform: rotateY( 180deg );
+    -moz-transform: rotateY( 180deg );
+    -o-transform: rotateY( 180deg );
+    transform: rotateY( 180deg );
+}`]
+})
+export class GameComponent  { 
+	Arr = Array; //Array type captured in a variable
+  num:number = 16;
+  isClass1Visible:boolean=true;
+  applyclass:boolean=false;
+   selected :any;
+   isAdd:boolean;
+ hightlightStatus: Array<boolean> = [];
+  item:string[];
+ add:string[];
+
+  bgcolor = ['#42c2f4','#f44183','#e5f441','#41f4eb','#a9eff2','#42c2f4','#9bffa7','#a9eff2','#ffe5b2','#9bffa7',
+'#ffe5b2','#f44183','#e5f441','#ffb2fc','#41f4eb','#ffb2fc'];
+  constructor( private el:ElementRef, private renderer:Renderer) {
+//this.nativeElement = el.nativeElement;
+    }
+
+   flip(item) {
+   console.log(item)
+  this.add.push(item);
+  };
+  isActive(item) {
+      return this.selected === item;
+  };
+ }

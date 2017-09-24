@@ -1,0 +1,10 @@
+	<p>{{feedback}}</p>
+   <p>Score:{{score}}</p>
+  	 <div class="row">
+	 <div *ngFor="let x of bgcolor; let i = index" class="columns">
+	 <div (click)="flip($event)" class="card"  attr.id="card_{{i}}">
+	 <div class="front"></div>
+	 <div class="back" [style.background]="x"></div></div>
+	 </div>
+	 </div>
+	     <p><a [routerLink]="['/login']">Logout</a></p>
